@@ -2,16 +2,32 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario SATI-AV</title>
+    <!-- Ruta corregida con url_for para el CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
-    <h1>Formulario de Solicitudes</h1>
-    <form action="/guardar" method="post">
-        <input type="text" name="carnet" placeholder="Carnet" required>
-        <input type="text" name="carrera" placeholder="Carrera" required>
-        <textarea name="motivo" placeholder="Motivo" required></textarea>
-        <button type="submit">Enviar</button>
-    </form>
+    <div class="container">
+        <h1>Formulario de Solicitud</h1>
+        
+       <!-- Mensajes Flash de exito o error -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('guardar')}}" method="POST">
+            <input type="text" name="carnet" placeholder="Carnet" required>
+            <input type="text" name="carrera" placeholder="Carrera" required>
+            <textarea name="motivo" placeholder="Motivo"></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+  
 </body>
 </html>
+
 

@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>SATI-AV</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>SATI-AV</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
     <form action="/login" method="post">
         <label for="password">Contraseña:</label>
         <input type="password" id="password" name="password" required>
@@ -13,4 +23,3 @@
     </form>
 </body>
 </html>
-
